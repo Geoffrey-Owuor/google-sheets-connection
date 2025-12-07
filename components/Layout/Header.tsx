@@ -26,8 +26,8 @@ const Header = () => {
     <>
       <AnimatePresence>{loading && <LoadingLine />}</AnimatePresence>
 
-      <div className="fixed top-0 right-0 left-0 z-50 bg-white/50 text-black backdrop-blur-sm dark:bg-gray-950/50 dark:text-white">
-        <div className="header-gradient m-4 flex items-center justify-between rounded-xl px-4 py-3">
+      <div className="custom-blur fixed top-0 right-0 left-0 z-50 bg-white/50 text-black dark:bg-slate-950/50 dark:text-white">
+        <div className="header-gradient m-4 flex items-center justify-between rounded-xl px-4 py-3 shadow-sm">
           <span className="text-xl font-semibold sm:text-2xl">
             GoogleSheetApi
           </span>

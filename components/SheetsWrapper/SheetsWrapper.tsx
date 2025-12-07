@@ -37,7 +37,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
           </div>
           <Link
             href="/"
-            className="mr-2 flex items-center gap-1.5 rounded-xl bg-slate-100 p-2 transition-colors hover:bg-slate-200 dark:bg-gray-800 dark:hover:bg-gray-800/50"
+            className="mr-2 flex items-center gap-1.5 rounded-xl bg-slate-200 p-2 transition-colors hover:bg-slate-200/50 dark:bg-gray-800 dark:hover:bg-gray-800/50"
           >
             <ArrowLeft className="h-4 w-4" />
             HomePage
@@ -58,11 +58,11 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-slate-800 dark:bg-slate-900/50">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-200 bg-gray-50 dark:border-slate-800 dark:bg-slate-800/50">
+                <tr className="border-b border-gray-200 bg-gray-100 dark:border-slate-800 dark:bg-slate-950">
                   {headers.map((header, index) => (
                     <th
                       key={index}
@@ -84,7 +84,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
                     {row.map((cell, cellIndex) => (
                       <td
                         key={cellIndex}
-                        className="px-6 py-4 text-sm whitespace-nowrap text-gray-900 dark:text-gray-100"
+                        className="max-w-[200px] truncate px-6 py-4 text-sm whitespace-nowrap text-gray-900 dark:text-gray-100"
                       >
                         <div className="truncate" title={cell}>
                           {cell}
@@ -98,11 +98,11 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
           </div>
         </div>
 
-        {filteredRows.length > 10 && (
-          <div className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
-            Showing all {filteredRows.length} records
-          </div>
-        )}
+        {/* Showing current records in the page */}
+        <div className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
+          Showing {filteredRows.length}{" "}
+          {filteredRows.length === 1 ? "record" : "records"}
+        </div>
       </div>
     </main>
   );

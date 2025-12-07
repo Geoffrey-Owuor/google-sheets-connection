@@ -5,7 +5,7 @@
 
 @layer base {
   .header-gradient {
-    @apply bg-linear-to-br from-blue-200 via-slate-200 to-slate-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-950;
+    @apply bg-linear-to-br from-blue-200 via-slate-200 to-slate-100 dark:from-slate-800 dark:via-slate-900 dark:to-slate-950;
   }
 
   html {
@@ -15,5 +15,12 @@
 
   html[data-theme="dark"] {
     scrollbar-color: #4b5563 transparent;
+  }
+
+  /* Custom blur compatible in all browsers */
+  .custom-blur {
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    will-change: backdrop-filter;
   }
 }
