@@ -1,19 +1,9 @@
 "use client";
 import Link from "next/link";
-import LoadingLine from "./LoadingLine";
-import { AnimatePresence } from "framer-motion";
-import useFinishLoading from "@/hooks/useFinishLoading";
-import { useState } from "react";
 
 const HomePage = () => {
-  const [loading, setLoading] = useState(false);
-
-  // Automatically set loading to false - now that components are not fully unmounted but hidden (States are preserved)
-  useFinishLoading({ loading, setLoading, timeout: 200 });
   return (
     <>
-      <AnimatePresence>{loading && <LoadingLine />}</AnimatePresence>
-
       <div className="mt-20 flex items-center justify-center px-4 pt-10 text-black dark:text-white">
         <div className="flex flex-col items-center gap-4">
           <h2 className="text-xl font-semibold sm:text-2xl">
@@ -37,7 +27,6 @@ const HomePage = () => {
 
           <Link
             href="/sheetdata"
-            onClick={() => setLoading(true)}
             className="rounded-xl bg-gray-900 px-4 py-3 text-white transition-colors hover:bg-gray-800 dark:bg-gray-200 dark:text-black dark:hover:bg-gray-300"
           >
             View Data
