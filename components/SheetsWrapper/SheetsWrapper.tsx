@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Search } from "lucide-react";
 
 type SheetsWrapperProps = {
   headers: string[]; //Array of header strings
@@ -9,7 +9,16 @@ type SheetsWrapperProps = {
 };
 
 const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
-  const [rows, setRows] = useState(rowData);
+  const rows = rowData;
+  //   State for setting the query to search
+  const [searchQuery, setSearchQuery] = useState("");
+
+  //   Logic for filtering the rows based on the search query
+  const filteredRows = rows.filter((row) =>
+    row.some((cell) =>
+      cell.toLowerCase().includes(searchQuery.toLocaleLowerCase()),
+    ),
+  );
 
   // Display the retrieved data
   return (
@@ -21,8 +30,9 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
               Google Sheet Data Integration
             </h1>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              Displaying {rows.length}{" "}
-              {rows.length === 1 ? "record" : "records"} from your spreadsheet
+              Displaying {filteredRows.length}{" "}
+              {filteredRows.length === 1 ? "record" : "records"} from your
+              spreadsheet
             </p>
           </div>
           <Link
@@ -32,6 +42,20 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
             <ArrowLeft className="h-4 w-4" />
             HomePage
           </Link>
+        </div>
+
+        {/* The search input field */}
+        <div className="mb-4">
+          <div className="relative">
+            <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search across all columns..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-lg border border-gray-200 bg-white py-2 pr-4 pl-10 text-sm text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-gray-100 dark:placeholder-gray-400 dark:focus:border-blue-400 dark:focus:ring-blue-400/20"
+            />
+          </div>
         </div>
 
         <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
@@ -52,7 +76,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-slate-800">
-                {rows.map((row, rowIndex) => (
+                {filteredRows.map((row, rowIndex) => (
                   <tr
                     key={rowIndex}
                     className="transition-colors hover:bg-gray-50 dark:hover:bg-slate-800/30"
@@ -74,9 +98,9 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
           </div>
         </div>
 
-        {rows.length > 10 && (
+        {filteredRows.length > 10 && (
           <div className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
-            Showing all {rows.length} records
+            Showing all {filteredRows.length} records
           </div>
         )}
       </div>
