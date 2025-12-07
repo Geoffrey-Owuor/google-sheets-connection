@@ -2,10 +2,14 @@
 import Link from "next/link";
 import LoadingLine from "./LoadingLine";
 import { AnimatePresence } from "framer-motion";
+import useFinishLoading from "@/hooks/useFinishLoading";
 import { useState } from "react";
 
 const HomePage = () => {
   const [loading, setLoading] = useState(false);
+
+  // Automatically set loading to false - now that components are not fully unmounted but hidden (States are preserved)
+  useFinishLoading({ loading, setLoading, timeout: 200 });
   return (
     <>
       <AnimatePresence>{loading && <LoadingLine />}</AnimatePresence>

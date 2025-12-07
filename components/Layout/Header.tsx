@@ -3,20 +3,15 @@ import { View } from "lucide-react";
 import ThemeToggle from "../Themes/ThemeToggle";
 import LoadingLine from "./LoadingLine";
 import { AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useFinishLoading from "@/hooks/useFinishLoading";
 import Link from "next/link";
 
 const Header = () => {
   const [loading, setLoading] = useState(false);
 
-  // UseEffect to automatically set loading to false after a certain time since the header is never unmounted
-  useEffect(() => {
-    if (!loading) return;
-
-    const id = setTimeout(() => setLoading(false), 400);
-
-    return () => clearTimeout(id);
-  }, [loading, setLoading]);
+  // Hook to automatically set loading to false after a certain time since the header is never unmounted
+  useFinishLoading({ loading, setLoading, timeout: 400 });
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.stopPropagation();

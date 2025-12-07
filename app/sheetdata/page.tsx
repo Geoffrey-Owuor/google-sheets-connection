@@ -1,9 +1,13 @@
 import DisplaySheetData from "@/components/DisplaySheetData/DisplaySheetData";
+import { Suspense } from "react";
+import SheetsLoadingSkeleton from "@/components/Skeletons/SheetsLoadingSkeleton";
 
-// Revalidate every 10 minutes
-export const revalidate = 600;
 const page = () => {
-  return <DisplaySheetData />;
+  return (
+    <Suspense fallback={<SheetsLoadingSkeleton />}>
+      <DisplaySheetData />
+    </Suspense>
+  );
 };
 
 export default page;

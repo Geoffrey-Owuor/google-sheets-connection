@@ -1,8 +1,14 @@
 const Footer = () => {
-  const year = new Date().getFullYear();
+  async function getDate() {
+    "use cache";
+    const year = new Date().getFullYear();
+
+    return year;
+  }
+
   return (
     <div className="p-2 text-center text-sm">
-      &copy; {year} Jeff. All rights reserved
+      &copy; {getDate()} Jeff. All rights reserved
     </div>
   );
 };
