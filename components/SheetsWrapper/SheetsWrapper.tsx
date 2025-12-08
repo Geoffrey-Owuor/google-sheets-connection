@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { updateSheetsData } from "@/ServerActions/updateSheetsData";
+import { useLoading } from "@/context/LoadingContext";
 import Link from "next/link";
 import PaginationUI from "../PaginationUI/PaginationUI";
 import LoadingSpinner from "../ui/LoadingSpinner";
@@ -13,6 +14,13 @@ type SheetsWrapperProps = {
 };
 
 const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
+  const { stopLoading } = useLoading();
+
+  //Stopping loading line on mount of this component
+  useEffect(() => {
+    stopLoading();
+  }, [stopLoading]);
+
   const rows = rowData;
   const router = useRouter();
   //   State for setting the query to search

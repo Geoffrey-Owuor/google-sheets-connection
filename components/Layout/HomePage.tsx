@@ -1,7 +1,9 @@
 "use client";
 import Link from "next/link";
+import { useLoading } from "@/context/LoadingContext";
 
 const HomePage = () => {
+  const { startLoading } = useLoading();
   return (
     <>
       <div className="mt-20 flex items-center justify-center px-4 pt-10 text-black dark:text-white">
@@ -26,6 +28,7 @@ const HomePage = () => {
           </div>
 
           <Link
+            onClick={startLoading}
             href="/sheetdata"
             className="rounded-xl bg-gray-900 px-4 py-3 text-white transition-colors hover:bg-gray-800 dark:bg-gray-200 dark:text-black dark:hover:bg-gray-300"
           >
