@@ -2,6 +2,8 @@
 import { ArrowLeft } from "lucide-react";
 
 type PaginationUIProps = {
+  recordsPerPage: number;
+  setRecordsPerPage: React.Dispatch<React.SetStateAction<number>>;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   totalPages: number;
@@ -11,6 +13,8 @@ type PaginationUIProps = {
 };
 
 const PaginationUI = ({
+  recordsPerPage,
+  setRecordsPerPage,
   currentPage,
   setCurrentPage,
   totalPages,
@@ -48,6 +52,22 @@ const PaginationUI = ({
             </span>{" "}
             of <span className="font-medium">{rowLength}</span> results
           </p>
+        </div>
+        <div className="hidden items-center justify-center gap-2 text-sm text-gray-500 sm:flex dark:text-gray-400">
+          <label htmlFor="recordsPerPage">Records Per Page:</label>
+          <select
+            name="recordsPerPage"
+            id="RecordsPerPage"
+            value={recordsPerPage}
+            onChange={(e) => setRecordsPerPage(Number(e.target.value))}
+            className="rounded-md border border-gray-300 bg-white px-2 py-1 focus:ring-1 focus:ring-blue-500 focus:outline-none dark:border-gray-700 dark:bg-slate-950"
+          >
+            {[5, 10, 20, 30, 50, 100].map((num) => (
+              <option key={num} value={num}>
+                {num}
+              </option>
+            ))}
+          </select>
         </div>
         <div>
           <nav className="isolate inline-flex -space-x-px rounded-xl shadow-sm">

@@ -1,10 +1,11 @@
 import { getSheetData } from "@/lib/googleSheets";
 import SheetsWrapper from "../SheetsWrapper/SheetsWrapper";
-import { cacheLife } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 
 const DisplaySheetData = async () => {
   "use cache";
   cacheLife("hours");
+  cacheTag("sheetsData");
 
   // Fetch directly in this server component
   const sheetData = await getSheetData();
