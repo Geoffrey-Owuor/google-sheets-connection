@@ -14,12 +14,13 @@ type SheetsWrapperProps = {
 };
 
 const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
-  const { stopLoading } = useLoading();
+  const { loading, stopLoading } = useLoading();
 
   //Stopping loading line on mount of this component
   useEffect(() => {
+    if (!loading) return;
     stopLoading();
-  }, [stopLoading]);
+  }, [stopLoading, loading]);
 
   const rows = rowData;
   const router = useRouter();
