@@ -14,13 +14,12 @@ type SheetsWrapperProps = {
 };
 
 const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
-  const { loading, stopLoading } = useLoading();
+  const { stopLoading } = useLoading();
 
   //Stopping loading line on mount of this component
   useEffect(() => {
-    if (!loading) return;
     stopLoading();
-  }, [stopLoading, loading]);
+  }, [stopLoading]);
 
   const rows = rowData;
   const router = useRouter();
@@ -73,7 +72,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
                 Google Sheet Data Integration
               </h1>
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Displaying {currentRecords.length}{" "}
+                Displaying {filteredRows.length}{" "}
                 {filteredRows.length === 1 ? "record" : "records"} from your
                 spreadsheet
               </p>
@@ -132,7 +131,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
                   {currentRecords.map((row, rowIndex) => (
                     <tr
                       key={rowIndex}
-                      className="transition-colors hover:bg-gray-50 dark:hover:bg-slate-800/30"
+                      className="hover:bg-gray-50 dark:hover:bg-slate-800/30"
                     >
                       {row.map((cell, cellIndex) => (
                         <td

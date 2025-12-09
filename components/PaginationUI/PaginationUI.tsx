@@ -23,12 +23,12 @@ const PaginationUI = ({
   rowLength,
 }: PaginationUIProps) => {
   return (
-    <div className="mt-4 flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-6 dark:border-slate-800">
-      <div className="flex flex-1 justify-between sm:hidden">
+    <div className="mt-4 flex items-center justify-between py-3">
+      <div className="flex flex-1 justify-between md:hidden">
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
-          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-gray-300 dark:hover:bg-slate-800"
+          className="relative inline-flex items-center rounded-lg border border-gray-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-gray-300 dark:hover:bg-slate-800"
         >
           Previous
         </button>
@@ -37,50 +37,55 @@ const PaginationUI = ({
             setCurrentPage((prev) => Math.min(prev + 1, totalPages))
           }
           disabled={currentPage === totalPages}
-          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-gray-300 dark:hover:bg-slate-800"
+          className="relative ml-3 inline-flex items-center rounded-lg border border-gray-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-gray-300 dark:hover:bg-slate-800"
         >
           Next
         </button>
       </div>
-      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-        <div>
-          <p className="text-sm text-gray-700 dark:text-gray-400">
-            Showing{" "}
-            <span className="font-medium">{indexOfFirstRecord + 1}</span> to{" "}
-            <span className="font-medium">
-              {Math.min(indexOfLastRecord, rowLength)}
-            </span>{" "}
-            of <span className="font-medium">{rowLength}</span> results
-          </p>
-        </div>
-        <div className="hidden items-center justify-center gap-2 text-sm text-gray-500 sm:flex dark:text-gray-400">
-          <label htmlFor="recordsPerPage">Records Per Page:</label>
-          <select
-            name="recordsPerPage"
-            id="RecordsPerPage"
-            value={recordsPerPage}
-            onChange={(e) => setRecordsPerPage(Number(e.target.value))}
-            className="rounded-md border border-gray-300 bg-white px-2 py-1 focus:ring-1 focus:ring-blue-500 focus:outline-none dark:border-gray-700 dark:bg-slate-950"
-          >
-            {[5, 10, 20, 30, 50, 100].map((num) => (
-              <option key={num} value={num}>
-                {num}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <nav className="isolate inline-flex -space-x-px rounded-xl shadow-sm">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="relative inline-flex items-center rounded-l-xl border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800"
+      <div className="hidden md:flex md:flex-1 md:items-center md:justify-between">
+        <div className="flex items-center gap-4">
+          <div className="hidden border-r border-gray-400 pr-3 lg:flex dark:border-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-400">
+              Showing{" "}
+              <span className="font-semibold">{indexOfFirstRecord + 1}</span> to{" "}
+              <span className="font-semibold">
+                {Math.min(indexOfLastRecord, rowLength)}
+              </span>{" "}
+              of <span className="font-semibold">{rowLength}</span> results
+            </p>
+          </div>
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+            <label htmlFor="recordsPerPage">Records:</label>
+            <select
+              name="recordsPerPage"
+              id="RecordsPerPage"
+              value={recordsPerPage}
+              onChange={(e) => setRecordsPerPage(Number(e.target.value))}
+              className="rounded-md border border-gray-300 bg-white px-2 py-1 focus:ring-1 focus:ring-blue-500 focus:outline-none dark:border-gray-700 dark:bg-slate-950"
             >
-              <span className="sr-only">Previous</span>
-              <ArrowLeft className="h-4 w-4" />
-            </button>
+              {[5, 10, 20, 30, 50, 100].map((num) => (
+                <option key={num} value={num}>
+                  {num}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <nav className="flex items-center justify-center gap-1">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span className="ml-2">Previous</span>
+          </button>
+
+          <div className="mx-2 flex items-center gap-1">
             {[...Array(totalPages)].map((_, index) => {
               const pageNumber = index + 1;
+
               // Show first page, last page, current page, and pages around current
               if (
                 pageNumber === 1 ||
@@ -91,10 +96,10 @@ const PaginationUI = ({
                   <button
                     key={pageNumber}
                     onClick={() => setCurrentPage(pageNumber)}
-                    className={`relative inline-flex items-center border px-4 py-2 text-sm font-medium ${
+                    className={`inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold ${
                       currentPage === pageNumber
-                        ? "z-10 border-blue-500 bg-blue-50 text-blue-600 dark:border-blue-400 dark:bg-blue-900/20 dark:text-blue-400"
-                        : "border-gray-300 bg-white text-gray-500 hover:bg-gray-50 dark:border-slate-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800"
+                        ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900"
+                        : "bg-slate-200 text-slate-700 hover:bg-slate-200/50 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
                     }`}
                   >
                     {pageNumber}
@@ -107,7 +112,7 @@ const PaginationUI = ({
                 return (
                   <span
                     key={pageNumber}
-                    className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 dark:border-slate-700 dark:bg-slate-900 dark:text-gray-400"
+                    className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-slate-400 dark:text-slate-500"
                   >
                     ...
                   </span>
@@ -115,18 +120,19 @@ const PaginationUI = ({
               }
               return null;
             })}
-            <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-              disabled={currentPage === totalPages}
-              className="relative inline-flex items-center rounded-r-xl border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-slate-800"
-            >
-              <span className="sr-only">Next</span>
-              <ArrowLeft className="h-4 w-4 rotate-180" />
-            </button>
-          </nav>
-        </div>
+          </div>
+
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+            className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+          >
+            <span className="mr-2">Next</span>
+            <ArrowLeft className="h-4 w-4 rotate-180" />
+          </button>
+        </nav>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const LoadingLine = () => {
     <>
       {loading && (
         <motion.div
-          className="fixed top-0 right-0 left-0 z-60 h-[3px] bg-linear-to-r from-blue-500 via-blue-600 to-blue-700"
+          className="fixed top-0 right-0 left-0 z-80 h-[3px] bg-linear-to-r from-blue-500 via-blue-600 to-blue-700"
           initial={{ scaleX: 0, transformOrigin: "left" }}
           animate={{
             scaleX: [0, 0.3, 0.6, 0.8, 0.95],
