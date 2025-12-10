@@ -10,5 +10,12 @@ export async function googleAuth() {
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 
-  return auth;
+  // Getting the sheets client
+  const sheets = google.sheets({ version: "v4", auth });
+
+  // Getting spreadsheet id
+  const spreadSheetId = process.env.GOOGLE_SHEET_ID;
+  const sheetName = "Sheet1";
+
+  return { sheets, spreadSheetId, sheetName };
 }

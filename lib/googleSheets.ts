@@ -1,18 +1,14 @@
-import { google } from "googleapis";
 import { googleAuth } from "./googleAuth";
 import { cache } from "react";
 
 async function fetchSheetData() {
   try {
-    const auth = await googleAuth();
-
-    //Get the sheets client
-    const sheets = google.sheets({ version: "v4", auth });
+    const { sheets, spreadSheetId, sheetName } = await googleAuth();
 
     // Fetch the data
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "Sheet1", // Adjust range as needed (e.g., just 'Sheet1' for everything or Sheet1!A1:B12 for the range)
+      spreadsheetId: spreadSheetId,
+      range: sheetName, // Adjust range as needed (e.g., just 'Sheet1' for everything or Sheet1!A1:B12 for the range)
     });
 
     // Return the rows

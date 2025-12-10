@@ -26,7 +26,7 @@ const HomePage = () => {
               everyday spreadsheet into a dynamic content engine.
             </p>
             <h4 className="mt-4 mb-2 text-xl font-semibold sm:text-lg">
-              Some Added Caveats
+              Features to work on
             </h4>
             <ul className="list-disc space-y-2 pl-5 italic marker:text-blue-500 dark:marker:text-blue-300">
               <li>Working on inserting new data</li>
