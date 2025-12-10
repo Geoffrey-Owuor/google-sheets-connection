@@ -1,11 +1,13 @@
 "use client";
 
-import { X } from "lucide-react";
+import { PencilLine, Plus, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Alert from "@/components/ui/Alert";
 
 type SheetFormModalProps = {
   isOpen: boolean;
+  updateData: boolean;
   onClose: () => void;
   headers: string[];
   rowData: string[];
@@ -14,12 +16,26 @@ type SheetFormModalProps = {
 
 const SheetFormModal = ({
   isOpen,
+  updateData,
   onClose,
   headers,
   rowData,
   rowIndex,
 }: SheetFormModalProps) => {
-  const [formData, setFormData] = useState(rowData);
+  // Setting up initial form data
+  const [formData, setFormData] = useState(() => {
+    const initial = [...rowData];
+    if (initial[0] === "") {
+      initial[0] = (rowIndex + 1).toString();
+    }
+    return initial;
+  });
+
+  const [alertInfo, setAlertInfo] = useState({
+    showAlert: false,
+    alertType: "",
+    alertMessage: "",
+  });
 
   // Effect to prevent html scroll when modal is open (for screens larger than 640px)
   useEffect(() => {
@@ -74,10 +90,10 @@ const SheetFormModal = ({
           <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4 dark:border-slate-800 dark:bg-slate-900">
             <div>
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Record Details
+                {updateData ? "Update Record" : "Add Record"}
               </h2>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Viewing record #{rowIndex + 1}
+                Record #{rowIndex + 1}
               </p>
             </div>
             <button
@@ -103,8 +119,9 @@ const SheetFormModal = ({
                   <input
                     type="text"
                     value={formData[index] || ""}
+                    disabled={index === 0}
                     onChange={(e) => handleChange(index, e.target.value)}
-                    className="my-2 w-full rounded-lg bg-gray-50 px-4 py-3 text-sm wrap-break-word text-gray-900 focus:border focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none dark:bg-slate-800/50 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-400/20"
+                    className={`my-2 w-full rounded-lg bg-gray-50 px-4 py-3 text-sm wrap-break-word text-gray-900 focus:border focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none disabled:cursor-not-allowed disabled:border disabled:border-gray-400 disabled:bg-gray-100 dark:bg-slate-800/50 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-400/20 dark:disabled:border-gray-600 dark:disabled:bg-gray-800`}
                   />
                 </div>
               ))}
@@ -113,14 +130,29 @@ const SheetFormModal = ({
 
           {/* Modal Footer - Fixed */}
           <div className="sticky bottom-0 border-t border-gray-200 bg-white px-6 py-4 dark:border-slate-800 dark:bg-slate-900">
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-between">
+              <button
+                onClick={handleClose}
+                className="flex items-center gap-1.5 rounded-lg bg-gray-950 px-4 py-2 text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-950 dark:hover:bg-slate-200"
+              >
+                {updateData ? (
+                  <>
+                    <PencilLine className="h-4 w-4" />
+                    Edit
+                  </>
+                ) : (
+                  <>
+                    <Plus className="h-4 w-4" />
+                    Add
+                  </>
+                )}
+              </button>
               <button
                 onClick={handleClose}
                 className="rounded-lg bg-gray-200 px-4 py-2 text-gray-900 transition-colors hover:bg-gray-300 dark:bg-slate-800 dark:text-gray-100 dark:hover:bg-slate-700"
               >
                 Close
               </button>
-              {/* Add more action buttons here if needed */}
             </div>
           </div>
         </div>

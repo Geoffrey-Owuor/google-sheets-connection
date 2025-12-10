@@ -7,7 +7,7 @@ import { useLoading } from "@/context/LoadingContext";
 import Link from "next/link";
 import PaginationUI from "../PaginationUI/PaginationUI";
 import LoadingSpinner from "../ui/LoadingSpinner";
-import { ArrowLeft, RefreshCcw, Search } from "lucide-react";
+import { ArrowLeft, Plus, RefreshCcw, Search } from "lucide-react";
 import SheetFormModal from "./SheetFormModal/SheetFormModal";
 
 type SheetsWrapperProps = {
@@ -35,8 +35,8 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
 
   // Modeal states
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedRow, setSelectedRow] = useState<string[] | null>(null);
-  const [selectedRowIndex, setSelectedRowIndex] = useState<number>(0);
+  const [selectedRow, setSelectedRow] = useState<string[]>(Array(20).fill(""));
+  const [selectedRowIndex, setSelectedRowIndex] = useState<number>(rows.length);
 
   //   Logic for filtering the rows based on the search query
   const filteredRows = rows.filter((row) =>
@@ -58,7 +58,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
     router.refresh();
   };
 
-  // Handle Row Click
+  // Handle Update Click
   const handleRowClick = (row: string[], originalIndex: number) => {
     setSelectedRow(row);
     setSelectedRowIndex(originalIndex);
@@ -68,7 +68,8 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
   // Handle closing modal
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedRow(null);
+    setSelectedRow(Array(20).fill(""));
+    setSelectedRowIndex(rows.length + 1);
   };
 
   //   Get total pages to show
@@ -87,9 +88,10 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
 
       {/* Row Detail Modal */}
       <AnimatePresence>
-        {selectedRow && (
+        {isModalOpen && selectedRow && (
           <SheetFormModal
             isOpen={isModalOpen}
+            updateData={selectedRowIndex < rows.length}
             onClose={handleCloseModal}
             headers={headers}
             rowData={selectedRow}
@@ -118,6 +120,13 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
               >
                 <RefreshCcw className="h-4 w-4" />
                 Refresh
+              </button>
+              <button
+                onClick={() => handleRowClick(selectedRow, rows.length)}
+                className="flex cursor-pointer items-center gap-1 rounded-xl bg-slate-950 px-3 py-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
+              >
+                <Plus className="h-4 w-4" />
+                Add
               </button>
               <Link
                 href="/"
