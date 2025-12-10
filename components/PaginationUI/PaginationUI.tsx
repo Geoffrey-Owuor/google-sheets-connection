@@ -1,5 +1,5 @@
 "use client";
-import { ArrowLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 
 type PaginationUIProps = {
   recordsPerPage: number;
@@ -76,10 +76,9 @@ const PaginationUI = ({
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+            className="inline-flex items-center justify-center rounded-lg p-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100 disabled:opacity-50 dark:text-slate-300 dark:hover:bg-slate-800"
           >
-            <ArrowLeft className="h-4 w-4" />
-            <span className="ml-2">Previous</span>
+            <ChevronLeft className="h-4 w-4" />
           </button>
 
           <div className="mx-2 flex items-center gap-1">
@@ -96,10 +95,10 @@ const PaginationUI = ({
                   <button
                     key={pageNumber}
                     onClick={() => setCurrentPage(pageNumber)}
-                    className={`inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold ${
+                    className={`inline-flex h-8 min-w-8 items-center justify-center rounded-lg text-sm font-semibold ${
                       currentPage === pageNumber
                         ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900"
-                        : "bg-slate-200 text-slate-700 hover:bg-slate-200/50 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+                        : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
                     }`}
                   >
                     {pageNumber}
@@ -127,10 +126,9 @@ const PaginationUI = ({
               setCurrentPage((prev) => Math.min(prev + 1, totalPages))
             }
             disabled={currentPage === totalPages}
-            className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+            className="inline-flex items-center justify-center rounded-lg p-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100 disabled:opacity-50 dark:text-slate-300 dark:hover:bg-slate-800"
           >
-            <span className="mr-2">Next</span>
-            <ArrowLeft className="h-4 w-4 rotate-180" />
+            <ChevronLeft className="h-4 w-4 rotate-180" />
           </button>
         </nav>
       </div>

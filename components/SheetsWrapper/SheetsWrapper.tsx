@@ -1,12 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AnimatePresence } from "framer-motion";
 import { updateSheetsData } from "@/ServerActions/updateSheetsData";
 import { useLoading } from "@/context/LoadingContext";
 import Link from "next/link";
 import PaginationUI from "../PaginationUI/PaginationUI";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { ArrowLeft, RefreshCcw, Search } from "lucide-react";
+import SheetFormModal from "./SheetFormModal/SheetFormModal";
 
 type SheetsWrapperProps = {
   headers: string[]; //Array of header strings
@@ -31,6 +33,11 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
 
+  // Modeal states
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<string[] | null>(null);
+  const [selectedRowIndex, setSelectedRowIndex] = useState<number>(0);
+
   //   Logic for filtering the rows based on the search query
   const filteredRows = rows.filter((row) =>
     row.some((cell) =>
@@ -51,6 +58,19 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
     router.refresh();
   };
 
+  // Handle Row Click
+  const handleRowClick = (row: string[], originalIndex: number) => {
+    setSelectedRow(row);
+    setSelectedRowIndex(originalIndex);
+    setIsModalOpen(true);
+  };
+
+  // Handle closing modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedRow(null);
+  };
+
   //   Get total pages to show
   const totalPages = Math.ceil(filteredRows.length / recordsPerPage);
   const indexOfLastRecord = currentPage * recordsPerPage;
@@ -64,6 +84,19 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
   return (
     <>
       <LoadingSpinner isLoading={isLoading} setIsLoading={setIsLoading} />
+
+      {/* Row Detail Modal */}
+      <AnimatePresence>
+        {selectedRow && (
+          <SheetFormModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            headers={headers}
+            rowData={selectedRow}
+            rowIndex={selectedRowIndex}
+          />
+        )}
+      </AnimatePresence>
       <main className="mt-20 min-h-screen bg-white px-4 py-12 dark:bg-slate-950">
         <div className="mx-auto">
           <div className="mb-8 flex items-center justify-between">
@@ -131,7 +164,10 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
                   {currentRecords.map((row, rowIndex) => (
                     <tr
                       key={rowIndex}
-                      className="hover:bg-gray-50 dark:hover:bg-slate-800/30"
+                      onClick={() =>
+                        handleRowClick(row, indexOfFirstRecord + rowIndex)
+                      }
+                      className="cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800/30"
                     >
                       {row.map((cell, cellIndex) => (
                         <td
