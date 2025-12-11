@@ -104,7 +104,7 @@ const SheetFormModal = ({
         await updateSheetsData(); //invalidate stored cache
         router.refresh(); //Refresh the data
         handleClose();
-      }, 3000);
+      }, 1500);
     } catch (error) {
       let message = "Something went wrong";
       if (error instanceof Error) {

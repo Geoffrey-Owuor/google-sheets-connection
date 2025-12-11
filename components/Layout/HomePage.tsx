@@ -29,8 +29,8 @@ const HomePage = () => {
           </h4>
           <ul className="list-disc space-y-2 pl-5 italic marker:text-blue-500 dark:marker:text-blue-300">
             <li>Retreiving google sheet data</li>
-            <li>Inserting new data</li>
-            <li>Updating existing data</li>
+            <li>Inserting new data into sheets</li>
+            <li>Updating existing sheet data</li>
           </ul>
         </div>
 

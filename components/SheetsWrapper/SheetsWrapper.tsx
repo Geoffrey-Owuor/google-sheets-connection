@@ -99,7 +99,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
           />
         )}
       </AnimatePresence>
-      <main className="mt-20 min-h-screen bg-white px-4 py-12 dark:bg-slate-950">
+      <main className="mt-20 min-h-screen px-4 py-12">
         <div className="mx-auto">
           <div className="mb-8 flex items-center justify-between">
             <div>
