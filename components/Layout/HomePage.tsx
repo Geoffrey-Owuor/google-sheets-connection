@@ -5,7 +5,7 @@ import { useLoading } from "@/context/LoadingContext";
 const HomePage = () => {
   const { startLoading } = useLoading();
   return (
-    <div className="mt-20 flex items-center justify-center px-4 pt-10 text-black dark:text-white">
+    <div className="my-20 flex items-center justify-center px-4 pt-10 text-black dark:text-white">
       <div className="flex flex-col items-center gap-4">
         <h2 className="text-xl font-semibold sm:text-2xl">
           Retrieve & Manage Google Sheet Data
@@ -19,8 +19,8 @@ const HomePage = () => {
             spreadsheet in real time. That means your content editors don&apos;t
             need to learn any new tools - if they can edit a spreadsheet, they
             can shape the entire app. Update a cell, tweak a value, hit save...
-            and the application instantly reflects those changes. No code edits,
-            no deployments, no stress. It&apos;s a simple, flexible, and
+            and the application reflects those changes. No code edits, no
+            deployments, no stress. It&apos;s a simple, flexible, and
             delightfully efficient setup - turning an everyday spreadsheet into
             a dynamic content engine.
           </p>

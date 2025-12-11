@@ -8,7 +8,10 @@ const Footer = () => {
 
   return (
     <div className="p-4 text-center text-sm">
-      &copy; {getDate()} Jeff. All rights reserved
+      &copy;{" "}
+      <span className="font-roboto-mono">
+        {getDate()} Jeff. All rights reserved
+      </span>
     </div>
   );
 };

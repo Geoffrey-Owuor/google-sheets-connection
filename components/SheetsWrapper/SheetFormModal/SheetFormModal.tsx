@@ -1,11 +1,12 @@
 "use client";
 
-import { PencilLine, Plus, X, Loader2 } from "lucide-react";
+import { PencilLine, Plus, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Alert from "@/components/ui/Alert";
 import ConfirmationDialog from "@/components/ui/ConfirmationDialog";
 import { useRouter } from "next/navigation";
+import SavingSpinner from "@/components/ui/SavingSpinner";
 import { updateSheetsData } from "@/ServerActions/updateSheetsData";
 
 type SheetFormModalProps = {
@@ -147,6 +148,8 @@ const SheetFormModal = ({
         )}
       </AnimatePresence>
 
+      {isSaving && <SavingSpinner />}
+
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         {/* Fixed background overlay */}
         <motion.div
@@ -216,12 +219,7 @@ const SheetFormModal = ({
                   disabled={isSaving}
                   className="flex items-center gap-1.5 rounded-lg bg-gray-950 px-4 py-2 text-white transition-colors hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white dark:text-gray-950 dark:hover:bg-slate-200"
                 >
-                  {isSaving ? (
-                    <>
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      Saving...
-                    </>
-                  ) : updateData ? (
+                  {updateData ? (
                     <>
                       <PencilLine className="h-4 w-4" />
                       Edit
