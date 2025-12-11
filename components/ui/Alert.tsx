@@ -14,8 +14,7 @@ const Alert = ({ message, type, onClose }: AlertProps) => {
 
   const handleClose = useCallback(() => {
     setIsClosing(true);
-    const timer = setTimeout(() => onClose(), 200); // Match this with animation duration
-    return () => clearTimeout(timer);
+    setTimeout(() => onClose(), 200); // Match this with animation duration
   }, [onClose]);
 
   //   Automatically closing after six seconds
@@ -36,12 +35,12 @@ const Alert = ({ message, type, onClose }: AlertProps) => {
 
   return (
     <div
-      className={`fixed right-2 bottom-8 left-2 z-50 md:right-auto md:left-4 ${
-        isClosing ? "animate-slideDown" : "animate-slideUp"
+      className={`fixed top-0 right-2 left-2 z-9999 md:left-auto ${
+        isClosing ? "animate-slideUp" : "animate-slideDown"
       }`}
     >
       <div
-        className={`mt-4 flex w-auto items-center justify-between rounded-xl border bg-black/80 px-3 py-4.5 text-white shadow-md dark:bg-white/80 dark:text-black`}
+        className={`mt-4 flex w-auto items-center justify-between rounded-xl border bg-black px-3 py-4.5 text-white shadow-md dark:bg-white dark:text-black`}
       >
         <div className="flex items-center gap-2">
           {/* Render the appropriate icon */}
