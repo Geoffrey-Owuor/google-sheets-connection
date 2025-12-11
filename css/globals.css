@@ -3,6 +3,12 @@
 /* Variant that works with next-themes */
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+@theme {
+  --font-roboto: var(--font-roboto);
+  --font-roboto-mono: var(--font-roboto-mono);
+  --font-dmsans: var(--font-dmsans);
+}
+
 @layer utilities {
   @keyframes slideDown {
     from {

@@ -10,7 +10,7 @@ const HomePage = () => {
         <h2 className="text-xl font-semibold sm:text-2xl">
           Retrieve & Manage Google Sheet Data
         </h2>
-        <div className="mx-auto w-full max-w-3xl rounded-xl bg-slate-200 p-6 dark:bg-slate-800/50">
+        <div className="font-dmsans mx-auto w-full max-w-3xl rounded-xl bg-slate-200 p-6 dark:bg-slate-800/50">
           <p className="text-left">
             This application uses Google Sheets as its secret weapon - a
             lightweight, surprisingly powerful mini-CMS. Instead of spinning up
@@ -27,7 +27,7 @@ const HomePage = () => {
           <h4 className="mt-4 mb-2 text-xl font-semibold sm:text-lg">
             Features included
           </h4>
-          <ul className="list-disc space-y-2 pl-5 italic marker:text-blue-500 dark:marker:text-blue-300">
+          <ul className="list-disc space-y-2 pl-5 marker:text-blue-500 dark:marker:text-blue-300">
             <li>Retreiving google sheet data</li>
             <li>Inserting new data into sheets</li>
             <li>Updating existing sheet data</li>

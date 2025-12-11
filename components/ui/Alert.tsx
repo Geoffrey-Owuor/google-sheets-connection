@@ -37,7 +37,7 @@ const Alert = ({ message, type, onClose }: AlertProps) => {
 
   return (
     <div
-      className={`fixed top-0 right-2 left-2 z-9999 md:left-auto ${
+      className={`fixed top-0 left-1/2 z-9999 -translate-x-1/2 ${
         isClosing ? "animate-slideUp" : "animate-slideDown"
       }`}
     >

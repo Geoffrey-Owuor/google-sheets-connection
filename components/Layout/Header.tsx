@@ -17,9 +17,9 @@ const Header = () => {
 
   return (
     <div className="custom-blur fixed top-0 right-0 left-0 z-50 text-black dark:text-white">
-      <div className="header-gradient m-4 flex items-center justify-between rounded-xl px-4 py-3 shadow-sm dark:border dark:border-gray-800">
+      <div className="header-gradient m-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm dark:border dark:border-gray-800">
         <Link href="/">
-          <span className="text-xl font-semibold sm:text-2xl">
+          <span className="font-roboto-mono text-xl font-semibold sm:text-2xl">
             GoogleSheetApi
           </span>
         </Link>
