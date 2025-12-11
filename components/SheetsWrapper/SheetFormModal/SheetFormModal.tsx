@@ -2,8 +2,9 @@
 
 import { PencilLine, Plus, X, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Alert from "@/components/ui/Alert";
+import ConfirmationDialog from "@/components/ui/ConfirmationDialog";
 import { useRouter } from "next/navigation";
 import { updateSheetsData } from "@/ServerActions/updateSheetsData";
 
@@ -26,6 +27,7 @@ const SheetFormModal = ({
 }: SheetFormModalProps) => {
   const router = useRouter();
   const [isSaving, setIsSaving] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   // Setting up initial form data
   const [formData, setFormData] = useState(() => {
@@ -71,6 +73,7 @@ const SheetFormModal = ({
 
   //Saving function
   const handleSave = async () => {
+    setShowConfirmation(false);
     setIsSaving(true);
 
     try {
@@ -101,7 +104,7 @@ const SheetFormModal = ({
         await updateSheetsData(); //invalidate stored cache
         router.refresh(); //Refresh the data
         handleClose();
-      }, 2000);
+      }, 3000);
     } catch (error) {
       let message = "Something went wrong";
       if (error instanceof Error) {
@@ -121,6 +124,7 @@ const SheetFormModal = ({
 
   return (
     <>
+      {/* Alert Notification */}
       {alertInfo.showAlert && (
         <Alert
           type={alertInfo.alertType}
@@ -130,6 +134,19 @@ const SheetFormModal = ({
           }
         />
       )}
+
+      {/* Confirmation Dialogue */}
+      <AnimatePresence>
+        {showConfirmation && (
+          <ConfirmationDialog
+            title="Confirm changes"
+            message="Are you sure to want to save these changes?"
+            onCancel={() => setShowConfirmation(false)}
+            onConfirm={handleSave}
+          />
+        )}
+      </AnimatePresence>
+
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         {/* Fixed background overlay */}
         <motion.div
@@ -195,9 +212,9 @@ const SheetFormModal = ({
             <div className="sticky bottom-0 border-t border-gray-200 bg-white px-6 py-4 dark:border-slate-800 dark:bg-slate-900">
               <div className="flex justify-between">
                 <button
-                  onClick={handleSave}
+                  onClick={() => setShowConfirmation(true)}
                   disabled={isSaving}
-                  className="flex items-center gap-1.5 rounded-lg bg-gray-950 px-4 py-2 text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-950 dark:hover:bg-slate-200"
+                  className="flex items-center gap-1.5 rounded-lg bg-gray-950 px-4 py-2 text-white transition-colors hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white dark:text-gray-950 dark:hover:bg-slate-200"
                 >
                   {isSaving ? (
                     <>
@@ -219,7 +236,7 @@ const SheetFormModal = ({
                 <button
                   onClick={handleClose}
                   disabled={isSaving}
-                  className="rounded-lg bg-gray-200 px-4 py-2 text-gray-900 transition-colors hover:bg-gray-300 dark:bg-slate-800 dark:text-gray-100 dark:hover:bg-slate-700"
+                  className="rounded-lg bg-gray-200 px-4 py-2 text-gray-900 transition-colors hover:bg-gray-300 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800 dark:text-gray-100 dark:hover:bg-slate-700"
                 >
                   Close
                 </button>

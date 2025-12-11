@@ -1,28 +1,30 @@
 "use client";
 
 import { XIcon, AlertCircle, CheckCircle } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 type AlertProps = {
   message: string;
   type: string;
   onClose: () => void;
 };
-
 const Alert = ({ message, type, onClose }: AlertProps) => {
   const [isClosing, setIsClosing] = useState(false);
 
-  const handleClose = useCallback(() => {
+  const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => onClose(), 200); // Match this with animation duration
-  }, [onClose]);
+  };
 
-  //   Automatically closing after six seconds
+  //Auto close after 6 seconds
   useEffect(() => {
-    const timer = setTimeout(handleClose, 6000);
+    const timer = setTimeout(() => {
+      setIsClosing(true);
+      setTimeout(() => onClose(), 200);
+    }, 6000);
 
     return () => clearTimeout(timer);
-  }, [handleClose]);
+  }, [onClose]);
 
   // Determine which icon to display based on type
   const IconComponent = type === "success" ? CheckCircle : AlertCircle;
