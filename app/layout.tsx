@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto, Roboto_Mono, DM_Sans } from "next/font/google";
 import Providers from "@/components/Themes/Providers";
-import Header from "@/components/Layout/Header";
-import Footer from "@/components/Layout/Footer";
 import { LoadingProvider } from "@/context/LoadingContext";
 import LoadingLine from "@/components/Layout/LoadingLine";
 import "../css/globals.css";
@@ -37,14 +35,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body
-        className={`${roboto.variable} ${robotoMono.variable} ${dmsans.variable} font-dmsans flex min-h-screen flex-col bg-white antialiased dark:bg-slate-950`}
+        className={`${roboto.variable} ${robotoMono.variable} ${dmsans.variable} font-dmsans bg-white antialiased dark:bg-slate-950`}
       >
         <Providers>
           <LoadingProvider>
             <LoadingLine />
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
+            <main>{children}</main>
           </LoadingProvider>
         </Providers>
       </body>

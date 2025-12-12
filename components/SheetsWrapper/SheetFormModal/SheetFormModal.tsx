@@ -3,10 +3,10 @@
 import { PencilLine, Plus, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Alert from "@/components/ui/Alert";
-import ConfirmationDialog from "@/components/ui/ConfirmationDialog";
+import Alert from "@/components/Modules/Alert";
+import ConfirmationDialog from "@/components/Modules/ConfirmationDialog";
 import { useRouter } from "next/navigation";
-import SavingSpinner from "@/components/ui/SavingSpinner";
+import SavingSpinner from "@/components/Modules/SavingSpinner";
 import { updateSheetsData } from "@/ServerActions/updateSheetsData";
 
 type SheetFormModalProps = {

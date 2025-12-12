@@ -6,7 +6,7 @@ import { updateSheetsData } from "@/ServerActions/updateSheetsData";
 import { useLoading } from "@/context/LoadingContext";
 import Link from "next/link";
 import PaginationUI from "../PaginationUI/PaginationUI";
-import LoadingSpinner from "../ui/LoadingSpinner";
+import LoadingSpinner from "../Modules/LoadingSpinner";
 import { ArrowLeft, Plus, RefreshCcw, Search } from "lucide-react";
 import SheetFormModal from "./SheetFormModal/SheetFormModal";
 
@@ -99,7 +99,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
           />
         )}
       </AnimatePresence>
-      <main className="mt-20 min-h-screen px-4 py-12">
+      <main className="m-4 h-[calc(100vh-2rem)] overflow-auto rounded-xl border px-4 py-4">
         <div className="mx-auto">
           <div className="mb-8 flex items-center justify-between">
             <div>
@@ -130,7 +130,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
               </button>
               <Link
                 href="/"
-                className="mr-2 flex items-center gap-1.5 rounded-xl bg-slate-200 p-2 transition-colors hover:bg-slate-200/50 dark:bg-gray-800 dark:hover:bg-gray-800/50"
+                className="mr-2 flex items-center gap-1.5 rounded-xl bg-slate-200 p-2 transition-colors hover:bg-slate-200/50 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-900/50"
               >
                 <ArrowLeft className="h-4 w-4" />
                 HomePage
@@ -152,45 +152,43 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-slate-800 dark:bg-slate-900/50">
-            <div className="overflow-x-auto pb-3">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-200 bg-gray-100 dark:border-slate-800 dark:bg-slate-950">
-                    {headers.map((header, index) => (
-                      <th
-                        key={index}
-                        className="px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-700 uppercase dark:text-gray-300"
+          <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white pb-3 dark:border-slate-800 dark:bg-slate-900/50">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-gray-200 bg-gray-100 dark:border-slate-800 dark:bg-slate-950">
+                  {headers.map((header, index) => (
+                    <th
+                      key={index}
+                      className="px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-700 uppercase dark:text-gray-300"
+                    >
+                      <div className="truncate" title={header}>
+                        {header}
+                      </div>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 dark:divide-slate-800">
+                {currentRecords.map((row, rowIndex) => (
+                  <tr
+                    key={rowIndex}
+                    onClick={() => handleRowClick(row, Number(row[0]))}
+                    className="cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800/30"
+                  >
+                    {row.map((cell, cellIndex) => (
+                      <td
+                        key={cellIndex}
+                        className="max-w-[200px] truncate px-6 py-4 text-sm whitespace-nowrap text-gray-900 dark:text-gray-100"
                       >
-                        <div className="truncate" title={header}>
-                          {header}
+                        <div className="truncate" title={cell}>
+                          {cell}
                         </div>
-                      </th>
+                      </td>
                     ))}
                   </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-slate-800">
-                  {currentRecords.map((row, rowIndex) => (
-                    <tr
-                      key={rowIndex}
-                      onClick={() => handleRowClick(row, Number(row[0]))}
-                      className="cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800/30"
-                    >
-                      {row.map((cell, cellIndex) => (
-                        <td
-                          key={cellIndex}
-                          className="max-w-[200px] truncate px-6 py-4 text-sm whitespace-nowrap text-gray-900 dark:text-gray-100"
-                        >
-                          <div className="truncate" title={cell}>
-                            {cell}
-                          </div>
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
 
           {/* Pagination UI */}
