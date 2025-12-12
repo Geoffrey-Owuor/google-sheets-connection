@@ -189,7 +189,7 @@ const SheetFormModal = ({
             </div>
 
             {/* Modal Body - Scrollable */}
-            <div className="max-h-[calc(90vh-120px)] overflow-y-auto px-6 py-4">
+            <div className="max-h-[calc(90vh-180px)] overflow-y-auto px-6 py-4 sm:max-h-[calc(90vh-120px)]">
               <div className="space-y-4">
                 {headers.map((header, index) => (
                   <div

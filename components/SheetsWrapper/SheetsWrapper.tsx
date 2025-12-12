@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import { updateSheetsData } from "@/ServerActions/updateSheetsData";
 import { useLoading } from "@/context/LoadingContext";
 import Link from "next/link";
+import ThemeToggle from "../Themes/ThemeToggle";
 import PaginationUI from "../PaginationUI/PaginationUI";
 import LoadingSpinner from "../Modules/LoadingSpinner";
 import { ArrowLeft, Plus, RefreshCcw, Search } from "lucide-react";
@@ -99,7 +100,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
           />
         )}
       </AnimatePresence>
-      <main className="m-4 h-[calc(100vh-2rem)] overflow-auto rounded-xl border px-4 py-4">
+      <main className="fixed inset-0 m-4 h-[calc(100vh-6rem)] overflow-auto rounded-xl border border-gray-100 px-4 py-4 shadow-sm sm:h-[calc(100vh-2rem)] dark:border-gray-800">
         <div className="mx-auto">
           <div className="mb-8 flex items-center justify-between">
             <div>
@@ -113,7 +114,8 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
               </p>
             </div>
 
-            <div className="hidden items-center gap-2 sm:flex">
+            <div className="hidden items-center gap-2 md:flex">
+              <ThemeToggle />
               <button
                 onClick={handleSheetRefresh}
                 className="flex items-center gap-1.5 rounded-xl bg-slate-950 p-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
