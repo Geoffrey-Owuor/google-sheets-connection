@@ -29,7 +29,7 @@ const Header = () => {
 
   return (
     <div
-      className={`fixed top-0 right-0 left-0 z-50 text-black dark:text-white ${isScrolled ? "custom-blur" : ""}`}
+      className={`containerizing fixed top-0 right-0 left-0 z-50 text-black dark:text-white ${isScrolled ? "custom-blur" : ""}`}
     >
       <div className="header-gradient m-4 flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm dark:border dark:border-gray-800">
         <Link href="/">

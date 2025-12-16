@@ -1,5 +1,5 @@
 "use client";
-import { ChevronLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronLeft } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -38,8 +38,9 @@ const PaginationUI = ({
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="relative inline-flex items-center rounded-lg border border-gray-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-gray-300 dark:hover:bg-slate-800"
+            className="relative inline-flex items-center gap-1 rounded-lg border border-gray-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-gray-300 dark:hover:bg-slate-800"
           >
+            <ArrowLeft className="h-4 w-4" />
             Previous
           </button>
           <button
@@ -47,9 +48,10 @@ const PaginationUI = ({
               setCurrentPage((prev) => Math.min(prev + 1, totalPages))
             }
             disabled={currentPage === totalPages}
-            className="relative ml-3 inline-flex items-center rounded-lg border border-gray-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-gray-300 dark:hover:bg-slate-800"
+            className="relative ml-3 inline-flex items-center gap-1 rounded-lg border border-gray-300 bg-slate-50 px-6 py-2 text-sm font-semibold text-gray-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-gray-300 dark:hover:bg-slate-800"
           >
             Next
+            <ArrowRight className="h-4 w-4" />
           </button>
         </div>
       )}

@@ -5,12 +5,12 @@ import { useLoading } from "@/context/LoadingContext";
 const HomePage = () => {
   const { startLoading } = useLoading();
   return (
-    <div className="my-20 flex items-center justify-center px-4 pt-10 text-black dark:text-white">
+    <div className="containerizing my-20 flex items-center justify-center px-4 pt-10 text-black dark:text-white">
       <div className="flex flex-col items-center gap-4">
         <h2 className="text-xl font-semibold sm:text-2xl">
           Retrieve & Manage Google Sheet Data
         </h2>
-        <div className="font-dmsans mx-auto w-full max-w-3xl rounded-xl bg-slate-200 p-6 dark:bg-slate-800/50">
+        <div className="font-dmsans mx-auto w-full max-w-5xl rounded-xl bg-slate-200 p-6 dark:bg-slate-800/50">
           <p className="text-left">
             This application uses Google Sheets as its secret weapon - a
             lightweight, surprisingly powerful mini-CMS. Instead of spinning up

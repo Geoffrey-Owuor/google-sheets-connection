@@ -100,8 +100,8 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
           />
         )}
       </AnimatePresence>
-      <main className="fixed inset-0 m-4 h-[calc(100vh-6rem)] overflow-auto rounded-xl border border-gray-100 px-4 py-4 shadow-sm sm:h-[calc(100vh-2rem)] dark:border-gray-800">
-        <div className="mx-auto">
+      <main className="fixed inset-0 m-2 h-[calc(100vh-5rem)] overflow-auto rounded-xl border border-gray-100 px-4 py-4 shadow-sm sm:h-[calc(100vh-1rem)] dark:border-gray-800">
+        <div className="containerizing mx-auto">
           <div className="mb-8 flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">

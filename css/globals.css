@@ -79,6 +79,22 @@
     backdrop-filter: blur(8px);
     will-change: backdrop-filter;
   }
+
+  /* Maintaining a certain length in different screens - Tailwind css configuration */
+  .containerizing {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    @media (width >= 40rem /* 640px */) {
+      max-width: 65rem /* 1040px */;
+    }
+    @media (width >= 64rem /* 1024px */) {
+      max-width: 90rem /* 1280px */;
+    }
+    @media (width >= 96rem /* 1536px */) {
+      max-width: 100rem /* 1536px */;
+    }
+  }
 }
 
 @theme inline {
