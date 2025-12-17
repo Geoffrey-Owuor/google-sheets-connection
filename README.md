@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📊 Next.js Google Sheets Manager
 
-## Getting Started
+An application built with **Next.js 16** and **TypeScript** that acts as a custom interface for Google Sheets. This app allows users to read, search, and perform CRUD operations on spreadsheet data directly through a web UI.
 
-First, run the development server:
+## 🚀 Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Real-time Read:** Fetches latest data from Google Sheets using the Google APIs Node.js Client.
+- **Caching and Refresh:** Caching fetched sheet data (Using next.js cache components) to reduce
+  google sheet api calls, with a refresh button to refresh the data (Cache Invalidation)
+- **Search & Filter:** Client-side and Server-side searching through sheet rows.
+- **Data Manipulation:** Update and edit specific cells or rows directly from the app.
+- **Type Safety:** Fully typed API responses and state management using TypeScript.
+- **Secure:** Server-side API handling to keep Google Service Account credentials hidden.
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **API:** [Google Sheets API v4](https://developers.google.com/sheets/api)
+- **Authentication:** Google Service Account (JWT)
+- **Styling:** Tailwind CSS
+
+---
+
+## ⚙️ Setup & Environment Variables Quick Guide
+
+To run this project, you will need to set up a **Service Account** in [Google Cloud Console](https://console.cloud.google.com/) and enable the Google Sheets API.
+
+Share your selected google sheet with the service account to allow read/write operations
+
+Create a `.env` file in the root directory and add the following(Just a few of the required env variables):
+
+```env
+GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@project-id.iam.gserviceaccount.com
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+GOOGLE_SHEET_ID=your_spreadsheet_id_from_url
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
