@@ -83,7 +83,7 @@ const PaginationUI = ({
                 <SelectItem
                   key={num}
                   value={num.toString()}
-                  className="rounded-lg text-gray-600 data-highlighted:bg-gray-100 data-highlighted:text-black data-[state=checked]:bg-gray-100 data-[state=checked]:text-black dark:text-gray-500 dark:data-highlighted:bg-gray-800 dark:data-highlighted:text-white dark:data-[state=checked]:bg-gray-800 dark:data-[state=checked]:text-white"
+                  className="rounded-lg text-gray-600 data-highlighted:bg-gray-100 data-highlighted:text-black data-[state=checked]:bg-transparent data-[state=checked]:text-black dark:text-gray-500 dark:data-highlighted:bg-gray-800 dark:data-highlighted:text-white dark:data-[state=checked]:bg-transparent dark:data-[state=checked]:text-white"
                 >
                   {num}
                 </SelectItem>

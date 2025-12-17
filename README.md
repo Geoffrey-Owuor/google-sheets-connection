@@ -1,11 +1,11 @@
 # 📊 Next.js Google Sheets Manager
 
-An application built with **Next.js 16** and **TypeScript** that acts as a custom interface for Google Sheets. This app allows users to read, search, and perform CRUD operations on spreadsheet data directly through a web UI.
+A web application built with **Next.js 16** and **TypeScript** that acts as a custom interface for Google Sheets. This app allows users to read, search, and perform CRUD operations on spreadsheet data directly through a web UI.
 
 ## 🚀 Key Features
 
 - **Real-time Read:** Fetches latest data from Google Sheets using the Google APIs Node.js Client.
-- **Caching and Refresh:** Caching fetched sheet data (Using next.js cache components) to reduce
+- **Caching and Refresh:** Caching fetched sheet data (Using Next.js 16 cache components) to reduce
   google sheet api calls, with a refresh button to refresh the data (Cache Invalidation)
 - **Search & Filter:** Client-side and Server-side searching through sheet rows.
 - **Data Manipulation:** Update and edit specific cells or rows directly from the app.
