@@ -57,6 +57,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
     setIsLoading(true);
     await updateSheetsData(); //invalidate stored cache
     router.refresh();
+    setIsLoading(false);
   };
 
   // Handle Update Click
@@ -85,7 +86,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
   // Display the retrieved data
   return (
     <>
-      <LoadingSpinner isLoading={isLoading} setIsLoading={setIsLoading} />
+      <LoadingSpinner isLoading={isLoading} />
 
       {/* Row Detail Modal */}
       <AnimatePresence>
@@ -118,7 +119,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
               <ThemeToggle />
               <button
                 onClick={handleSheetRefresh}
-                className="flex items-center gap-1.5 rounded-xl bg-slate-950 p-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
+                className="flex cursor-pointer items-center gap-1.5 rounded-xl bg-slate-950 p-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
               >
                 <RefreshCcw className="h-4 w-4" />
                 Refresh

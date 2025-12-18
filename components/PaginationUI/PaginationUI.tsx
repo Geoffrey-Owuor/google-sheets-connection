@@ -77,13 +77,15 @@ const PaginationUI = ({
             </SelectTrigger>
             <SelectContent className="rounded-xl bg-white dark:border dark:border-slate-800 dark:bg-slate-900">
               <SelectGroup>
-                <SelectLabel>rows</SelectLabel>
+                <SelectLabel className="text-gray-400 dark:text-gray-500">
+                  rows
+                </SelectLabel>
               </SelectGroup>
               {[5, 10, 20, 30, 50, 100].map((num) => (
                 <SelectItem
                   key={num}
                   value={num.toString()}
-                  className="rounded-lg text-gray-600 data-highlighted:bg-gray-100 data-highlighted:text-black data-[state=checked]:bg-transparent data-[state=checked]:text-black dark:text-gray-500 dark:data-highlighted:bg-gray-800 dark:data-highlighted:text-white dark:data-[state=checked]:bg-transparent dark:data-[state=checked]:text-white"
+                  className="rounded-lg text-gray-600 focus:bg-gray-100 focus:text-black dark:text-gray-400 dark:focus:bg-gray-800 dark:focus:text-white"
                 >
                   {num}
                 </SelectItem>
