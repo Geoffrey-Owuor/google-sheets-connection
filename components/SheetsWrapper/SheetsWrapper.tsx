@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { AnimatePresence } from "framer-motion";
 import { updateSheetsData } from "@/ServerActions/updateSheetsData";
 import { useLoading } from "@/context/LoadingContext";
@@ -25,10 +25,9 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
   }, [stopLoading]);
 
   const rows = rowData;
-  const router = useRouter();
   //   State for setting the query to search
   const [searchQuery, setSearchQuery] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isRefreshing, startTransition] = useTransition();
 
   //   Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,13 +51,9 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
     setCurrentPage(1);
   };
 
-  // Refreshing data and page
-  const handleSheetRefresh = async () => {
-    setIsLoading(true);
-    await updateSheetsData(); //invalidate stored cache
-    router.refresh();
-    setIsLoading(false);
-  };
+  // Refreshing data by invalidating stored cache
+  const handleSheetRefresh = () =>
+    startTransition(async () => await updateSheetsData());
 
   // Handle Update Click
   const handleRowClick = (row: string[], originalIndex: number) => {
@@ -86,7 +81,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
   // Display the retrieved data
   return (
     <>
-      <LoadingSpinner isLoading={isLoading} />
+      <LoadingSpinner isLoading={isRefreshing} />
 
       {/* Row Detail Modal */}
       <AnimatePresence>
