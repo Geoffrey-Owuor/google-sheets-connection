@@ -8,7 +8,7 @@ import Link from "next/link";
 import ThemeToggle from "../Themes/ThemeToggle";
 import PaginationUI from "../PaginationUI/PaginationUI";
 import LoadingSpinner from "../Modules/LoadingSpinner";
-import { ArrowLeft, Plus, RefreshCcw, Search } from "lucide-react";
+import { ArrowLeft, Plus, RefreshCcw, Search, X } from "lucide-react";
 import SheetFormModal from "./SheetFormModal/SheetFormModal";
 
 type SheetsWrapperProps = {
@@ -114,21 +114,21 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
               <ThemeToggle />
               <button
                 onClick={handleSheetRefresh}
-                className="flex cursor-pointer items-center gap-1.5 rounded-xl bg-slate-950 p-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
+                className="flex cursor-pointer items-center gap-1.5 rounded-[9px] bg-slate-950 p-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
               >
                 <RefreshCcw className="h-4 w-4" />
                 Refresh
               </button>
               <button
                 onClick={() => handleRowClick(selectedRow, rows.length + 1)}
-                className="flex cursor-pointer items-center gap-1 rounded-xl bg-slate-950 px-3 py-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
+                className="flex cursor-pointer items-center gap-1 rounded-[9px] bg-slate-950 px-3 py-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
               >
                 <Plus className="h-4 w-4" />
                 Add
               </button>
               <Link
                 href="/"
-                className="mr-2 flex items-center gap-1.5 rounded-xl bg-slate-200 p-2 transition-colors hover:bg-slate-200/50 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-900/50"
+                className="flex cursor-pointer items-center gap-1 rounded-[9px] bg-slate-950 px-3 py-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
               >
                 <ArrowLeft className="h-4 w-4" />
                 HomePage
@@ -147,6 +147,12 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
                 onChange={handleSearch}
                 className="w-80 rounded-lg border border-gray-300 bg-white py-2 pr-4 pl-10 text-sm text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-gray-100 dark:placeholder-gray-400 dark:focus:border-blue-400 dark:focus:ring-blue-400/20"
               />
+              <div
+                className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-1 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={() => setSearchQuery("")}
+              >
+                <X className="h-4 w-4" />
+              </div>
             </div>
           </div>
 

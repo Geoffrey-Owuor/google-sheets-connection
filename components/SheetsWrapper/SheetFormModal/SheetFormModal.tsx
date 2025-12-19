@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Alert from "@/components/Modules/Alert";
 import ConfirmationDialog from "@/components/Modules/ConfirmationDialog";
-import { useRouter } from "next/navigation";
 import SavingSpinner from "@/components/Modules/SavingSpinner";
 import { updateSheetsData } from "@/ServerActions/updateSheetsData";
 
@@ -26,7 +25,6 @@ const SheetFormModal = ({
   rowData,
   rowIndex,
 }: SheetFormModalProps) => {
-  const router = useRouter();
   const [isSaving, setIsSaving] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -103,7 +101,6 @@ const SheetFormModal = ({
       // Refresh page data and close modal after a short delay 2 seconds
       setTimeout(async () => {
         await updateSheetsData(); //invalidate stored cache
-        router.refresh(); //Refresh the data
         handleClose();
       }, 1500);
     } catch (error) {
