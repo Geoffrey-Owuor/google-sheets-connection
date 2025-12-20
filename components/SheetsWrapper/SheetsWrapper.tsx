@@ -114,21 +114,21 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
               <ThemeToggle />
               <button
                 onClick={handleSheetRefresh}
-                className="flex cursor-pointer items-center gap-1.5 rounded-[9px] bg-slate-950 p-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
+                className="flex cursor-pointer items-center gap-1.5 rounded-[12px] bg-slate-950 p-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
               >
                 <RefreshCcw className="h-4 w-4" />
                 Refresh
               </button>
               <button
                 onClick={() => handleRowClick(selectedRow, rows.length + 1)}
-                className="flex cursor-pointer items-center gap-1 rounded-[9px] bg-slate-950 px-3 py-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
+                className="flex cursor-pointer items-center gap-1 rounded-[12px] bg-slate-950 px-3 py-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
               >
                 <Plus className="h-4 w-4" />
                 Add
               </button>
               <Link
                 href="/"
-                className="flex cursor-pointer items-center gap-1 rounded-[9px] bg-slate-950 px-3 py-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
+                className="flex cursor-pointer items-center gap-1 rounded-[12px] bg-slate-950 px-3 py-2 text-white transition-colors hover:bg-slate-800 dark:bg-slate-200 dark:text-black dark:hover:bg-slate-300"
               >
                 <ArrowLeft className="h-4 w-4" />
                 HomePage
