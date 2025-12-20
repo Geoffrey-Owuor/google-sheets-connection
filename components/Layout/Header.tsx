@@ -1,11 +1,11 @@
 "use client";
 import {
-  View,
   Settings,
   Database,
   FileSpreadsheet,
   Download,
   RefreshCw,
+  Club,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
@@ -73,7 +73,7 @@ const Header = () => {
           </nav>
 
           {/* Right Section */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <div className="h-9 w-9">
               <ThemeToggle />
             </div>
@@ -85,7 +85,7 @@ const Header = () => {
                 href={isOnSheetData ? "#" : "/sheetdata"}
                 className="flex items-center justify-center rounded-lg p-2 text-gray-700 transition-colors hover:bg-gray-100 md:hidden dark:text-gray-300 dark:hover:bg-gray-800"
               >
-                <View className="h-6 w-6 shrink-0" />
+                <Club className="h-6 w-6" />
               </Link>
             </div>
 
@@ -95,8 +95,8 @@ const Header = () => {
               href={isOnSheetData ? "#" : "/sheetdata"}
               className="hidden items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm text-white transition-all hover:bg-blue-700 hover:shadow-lg md:flex"
             >
-              <View className="h-5 w-5" />
-              View Data
+              Playground
+              <Club className="h-4 w-4" />
             </Link>
           </div>
         </div>

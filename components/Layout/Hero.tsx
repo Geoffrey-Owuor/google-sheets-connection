@@ -68,7 +68,7 @@ export const Hero = () => {
               href="https://github.com/Geoffrey-Owuor/google-sheets-connection"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-roboto-mono rounded-xl border-2 border-slate-300 bg-transparent px-8 py-4 font-semibold text-black transition-all hover:border-slate-400 hover:bg-slate-50 dark:border-slate-600 dark:text-white dark:hover:border-slate-500 dark:hover:bg-slate-800"
+              className="font-roboto-mono rounded-xl border border-slate-300 bg-transparent px-8 py-4 font-semibold text-black transition-all hover:border-slate-400 hover:bg-slate-50 dark:border-slate-600 dark:text-white dark:hover:border-slate-500 dark:hover:bg-slate-800"
             >
               View Repository
             </a>
