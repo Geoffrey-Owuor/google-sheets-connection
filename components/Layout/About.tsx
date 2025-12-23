@@ -86,7 +86,7 @@ export const About = () => {
               className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-6 transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-gray-900"
             >
               <div
-                className={`mb-4 inline-flex rounded-xl bg-linear-to-br ${colorMap[feature.color]} p-3 text-white shadow-lg`}
+                className={`mb-4 inline-flex rounded-full bg-linear-to-br ${colorMap[feature.color]} p-3 text-white shadow-lg`}
               >
                 {feature.icon}
               </div>

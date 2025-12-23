@@ -51,10 +51,9 @@ const Header = () => {
         <div className="containerizing mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             {/* Logo Section */}
-            <Link href="/" className="group flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-blue-600 to-purple-600 transition-transform group-hover:scale-105">
-                <FileSpreadsheet className="h-5 w-5 text-white" />
-              </div>
+            <Link href="/" className="group relative flex items-center gap-2">
+              <div className="flex h-8 w-8 rotate-45 items-center justify-center rounded-lg bg-linear-to-br from-blue-600 to-purple-600 transition-transform group-hover:scale-105"></div>
+              <FileSpreadsheet className="absolute left-[7.6px] h-4.5 w-4.5 text-white" />
               <span className="font-roboto-mono hidden text-lg font-semibold tracking-tight text-gray-900 sm:block dark:text-white">
                 GoogleSheetApi
               </span>
@@ -66,7 +65,7 @@ const Header = () => {
                 <button
                   key={index}
                   onClick={() => {}}
-                  className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
+                  className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
                   title={text}
                 >
                   <Icon className="h-4 w-4" />
@@ -86,7 +85,7 @@ const Header = () => {
                 <Link
                   onClick={handleLinkClick}
                   href={isOnSheetData ? "#" : "/sheetdata"}
-                  className="flex items-center justify-center rounded-lg p-2 text-gray-700 transition-colors hover:bg-gray-100 md:hidden dark:text-gray-300 dark:hover:bg-gray-800"
+                  className="flex items-center justify-center rounded-full p-2 text-gray-700 transition-colors hover:bg-gray-100 md:hidden dark:text-gray-300 dark:hover:bg-gray-800"
                 >
                   <Club className="h-6 w-6" />
                 </Link>
@@ -96,7 +95,7 @@ const Header = () => {
               <Link
                 onClick={handleLinkClick}
                 href={isOnSheetData ? "#" : "/sheetdata"}
-                className="hidden items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm text-white transition-all hover:bg-blue-700 hover:shadow-lg md:flex"
+                className="hidden items-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-sm text-white transition-all hover:bg-blue-700 hover:shadow-lg md:flex"
               >
                 Playground
                 <Club className="h-4 w-4" />

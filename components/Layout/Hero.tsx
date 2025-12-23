@@ -56,7 +56,7 @@ export const Hero = () => {
           >
             <button
               onClick={() => handleRouting("/sheetdata")}
-              className="group relative cursor-pointer overflow-hidden rounded-xl bg-gray-900 px-8 py-4 font-semibold text-white transition-all hover:bg-gray-800 hover:shadow-lg dark:bg-gray-200 dark:text-black dark:hover:bg-gray-300"
+              className="group relative cursor-pointer overflow-hidden rounded-full bg-gray-900 px-8 py-4 font-semibold text-white transition-all hover:bg-gray-800 hover:shadow-lg dark:bg-gray-200 dark:text-black dark:hover:bg-gray-300"
             >
               <span className="relative z-10">Explore Data Playground</span>
               <motion.div
@@ -68,7 +68,7 @@ export const Hero = () => {
               href="https://github.com/Geoffrey-Owuor/google-sheets-connection"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-roboto-mono rounded-xl border border-slate-300 bg-transparent px-8 py-4 font-semibold text-black transition-all hover:border-slate-400 hover:bg-slate-50 dark:border-slate-600 dark:text-white dark:hover:border-slate-500 dark:hover:bg-slate-800"
+              className="font-roboto-mono rounded-full border border-slate-300 bg-transparent px-8 py-4 font-semibold text-black transition-all hover:border-slate-400 hover:bg-slate-50 dark:border-slate-600 dark:text-white dark:hover:border-slate-500 dark:hover:bg-slate-800"
             >
               View Repository
             </a>
