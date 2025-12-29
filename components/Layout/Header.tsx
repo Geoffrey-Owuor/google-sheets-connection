@@ -48,7 +48,7 @@ const Header = () => {
       <header
         className={`${isScrolled ? "hidden" : "fixed top-0 right-0 left-0 z-50"}`}
       >
-        <div className="containerizing mx-auto px-4">
+        <div className="mx-auto max-w-7xl px-4">
           <div className="flex h-16 items-center justify-between">
             {/* Logo Section */}
             <Link href="/" className="group relative flex items-center gap-2">

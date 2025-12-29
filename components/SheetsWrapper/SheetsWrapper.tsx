@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useTransition } from "react";
 import { AnimatePresence } from "framer-motion";
 import { updateSheetsData } from "@/ServerActions/updateSheetsData";
@@ -38,12 +38,15 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
   const [selectedRow, setSelectedRow] = useState<string[]>(Array(20).fill(""));
   const [selectedRowIndex, setSelectedRowIndex] = useState<number>(rows.length);
 
-  //   Logic for filtering the rows based on the search query
-  const filteredRows = rows.filter((row) =>
-    row.some((cell) =>
-      cell.toLowerCase().includes(searchQuery.toLocaleLowerCase()),
-    ),
-  );
+  // Logic for filtering the rows based on the search query
+  const filteredRows = useMemo(() => {
+    if (!searchQuery) return rows;
+    const lowerQuery = searchQuery.toLowerCase();
+
+    return rows.filter((row) =>
+      row.some((cell) => cell.toLowerCase().includes(lowerQuery)),
+    );
+  }, [searchQuery, rows]);
 
   // handle search query
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,7 +100,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
         )}
       </AnimatePresence>
       <main className="fixed inset-0 m-2 h-[calc(100vh-5rem)] overflow-auto rounded-xl border border-gray-100 px-4 py-4 shadow-sm sm:h-[calc(100vh-1rem)] dark:border-gray-800">
-        <div className="containerizing mx-auto">
+        <div className="mx-auto max-w-7xl">
           <div className="mb-8 flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
@@ -110,7 +113,7 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
               </p>
             </div>
 
-            <div className="hidden items-center gap-2 md:flex">
+            <div className="hidden items-center gap-2 px-2 md:flex">
               <ThemeToggle />
               <button
                 onClick={handleSheetRefresh}
@@ -139,16 +142,16 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
           {/* The search input field */}
           <div className="mb-4 flex justify-center">
             <div className="relative">
-              <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search across all columns..."
                 value={searchQuery}
                 onChange={handleSearch}
-                className="w-80 rounded-lg border border-gray-300 bg-white py-2 pr-4 pl-10 text-sm text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-gray-100 dark:placeholder-gray-400 dark:focus:border-blue-400 dark:focus:ring-blue-400/20"
+                className="w-80 rounded-full border border-gray-300 bg-white py-3 pr-4 pl-11 text-sm text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-gray-100 dark:placeholder-gray-400 dark:focus:border-blue-400 dark:focus:ring-blue-400/20"
               />
               <div
-                className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-1 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="absolute top-1/2 right-4 -translate-y-1/2 rounded-full p-1 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                 onClick={() => setSearchQuery("")}
               >
                 <X className="h-4 w-4" />
