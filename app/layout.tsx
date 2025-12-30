@@ -34,6 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+      <head>
+        <meta name="apple-mobile-web-app-title" content="SheetApp" />
+      </head>
       <body
         className={`${roboto.variable} ${robotoMono.variable} ${dmsans.variable} font-dmsans bg-white antialiased dark:bg-slate-950`}
       >
