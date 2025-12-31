@@ -143,7 +143,7 @@ const SheetFormModal = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="custom-blur absolute inset-0 bg-black/50"
+          className="absolute inset-0 bg-black/50 dark:bg-black/60"
           onClick={handleClose}
         />
         {/* Scrollable modal content */}
