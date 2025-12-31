@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useMemo } from "react";
 import { useTransition } from "react";
+import Alert from "../Modules/Alert";
 import { AnimatePresence } from "framer-motion";
 import { updateSheetsData } from "@/ServerActions/updateSheetsData";
 import { useLoading } from "@/context/LoadingContext";
@@ -18,6 +19,11 @@ type SheetsWrapperProps = {
 
 const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
   const { stopLoading } = useLoading();
+  const [alertInfo, setAlertInfo] = useState({
+    alertType: "",
+    showAlert: false,
+    alertMessage: "",
+  });
 
   //Stopping loading line on mount of this component
   useEffect(() => {
@@ -86,11 +92,22 @@ const SheetsWrapper = ({ headers, rowData }: SheetsWrapperProps) => {
     <>
       <LoadingSpinner isLoading={isRefreshing} />
 
+      {alertInfo.showAlert && (
+        <Alert
+          message={alertInfo.alertMessage}
+          type={alertInfo.alertType}
+          onClose={() =>
+            setAlertInfo({ showAlert: false, alertType: "", alertMessage: "" })
+          }
+        />
+      )}
+
       {/* Row Detail Modal */}
       <AnimatePresence>
         {isModalOpen && selectedRow && (
           <SheetFormModal
             isOpen={isModalOpen}
+            setAlertInfo={setAlertInfo}
             updateData={selectedRowIndex < rows.length}
             onClose={handleCloseModal}
             headers={headers}

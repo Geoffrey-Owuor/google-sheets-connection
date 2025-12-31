@@ -2,8 +2,7 @@
 
 import { PencilLine, Plus, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Alert from "@/components/Modules/Alert";
+import { motion } from "framer-motion";
 import ConfirmationDialog from "@/components/Modules/ConfirmationDialog";
 import SavingSpinner from "@/components/Modules/SavingSpinner";
 import { updateSheetsData } from "@/ServerActions/updateSheetsData";
@@ -12,9 +11,16 @@ type SheetFormModalProps = {
   isOpen: boolean;
   updateData: boolean;
   onClose: () => void;
+  setAlertInfo: (alert: alertProps) => void;
   headers: string[];
   rowData: string[];
   rowIndex: number;
+};
+
+type alertProps = {
+  alertType: string;
+  showAlert: boolean;
+  alertMessage: string;
 };
 
 const SheetFormModal = ({
@@ -23,6 +29,7 @@ const SheetFormModal = ({
   onClose,
   headers,
   rowData,
+  setAlertInfo,
   rowIndex,
 }: SheetFormModalProps) => {
   const [isSaving, setIsSaving] = useState(false);
@@ -35,12 +42,6 @@ const SheetFormModal = ({
       initial[0] = rowIndex.toString();
     }
     return initial;
-  });
-
-  const [alertInfo, setAlertInfo] = useState({
-    showAlert: false,
-    alertType: "",
-    alertMessage: "",
   });
 
   // Effect to prevent html scroll when modal is open (for screens larger than 640px)
@@ -91,18 +92,18 @@ const SheetFormModal = ({
       if (!response.ok)
         throw new Error(result.message || "Failed to save data");
 
-      // Show Alert Success
+      //Update sheet data, set Alert Message, and close modal immediately
+      await updateSheetsData();
+
+      // Show Alert Success Message
       setAlertInfo({
         showAlert: true,
         alertType: "success",
         alertMessage: result.message || "Record saved successfully",
       });
 
-      // Refresh page data and close modal after a short delay 2 seconds
-      setTimeout(async () => {
-        await updateSheetsData(); //invalidate stored cache
-        handleClose();
-      }, 1500);
+      // Close the modal
+      handleClose();
     } catch (error) {
       let message = "Something went wrong";
       if (error instanceof Error) {
@@ -122,28 +123,16 @@ const SheetFormModal = ({
 
   return (
     <>
-      {/* Alert Notification */}
-      {alertInfo.showAlert && (
-        <Alert
-          type={alertInfo.alertType}
-          message={alertInfo.alertMessage}
-          onClose={() =>
-            setAlertInfo({ showAlert: false, alertMessage: "", alertType: "" })
-          }
+      {/* Confirmation Dialogue */}
+
+      {showConfirmation && (
+        <ConfirmationDialog
+          title="Confirm changes"
+          message="Are you sure to want to save these changes?"
+          onCancel={() => setShowConfirmation(false)}
+          onConfirm={handleSave}
         />
       )}
-
-      {/* Confirmation Dialogue */}
-      <AnimatePresence>
-        {showConfirmation && (
-          <ConfirmationDialog
-            title="Confirm changes"
-            message="Are you sure to want to save these changes?"
-            onCancel={() => setShowConfirmation(false)}
-            onConfirm={handleSave}
-          />
-        )}
-      </AnimatePresence>
 
       {isSaving && <SavingSpinner />}
 
