@@ -18,6 +18,7 @@ const Header = () => {
   const pathname = usePathname();
   const { startLoading } = useLoading();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showFloatingHeader, setShowFloatingHeader] = useState(false);
   const isOnSheetData = pathname === "/sheetdata";
 
   const handleLinkClick = () => {
@@ -29,6 +30,11 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
+
+      // Reset floating header once user returns to the top
+      if (window.scrollY === 0) {
+        setShowFloatingHeader(true);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -44,7 +50,12 @@ const Header = () => {
 
   return (
     <>
-      <FloatingHeader navLinks={navLinks} isScrolled={isScrolled} />
+      <FloatingHeader
+        navLinks={navLinks}
+        isScrolled={isScrolled}
+        showFloatingHeader={showFloatingHeader}
+        closeFloatingHeader={() => setShowFloatingHeader(false)}
+      />
       <header
         className={`${isScrolled ? "hidden" : "fixed top-0 right-0 left-0 z-50"}`}
       >

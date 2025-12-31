@@ -1,19 +1,26 @@
-import { motion } from "framer-motion";
-import { LucideIcon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { LucideIcon, X } from "lucide-react";
 
 type navLink = {
   Icon: LucideIcon;
   text: string;
 };
 type floatingHeaderProps = {
+  showFloatingHeader: boolean;
   isScrolled: boolean;
+  closeFloatingHeader: () => void;
   navLinks: navLink[];
 };
 
-const FloatingHeader = ({ isScrolled, navLinks }: floatingHeaderProps) => {
+const FloatingHeader = ({
+  showFloatingHeader,
+  isScrolled,
+  closeFloatingHeader,
+  navLinks,
+}: floatingHeaderProps) => {
   return (
-    <>
-      {isScrolled && (
+    <AnimatePresence>
+      {isScrolled && showFloatingHeader && (
         <motion.div
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -22,7 +29,7 @@ const FloatingHeader = ({ isScrolled, navLinks }: floatingHeaderProps) => {
           className="custom-blur fixed top-4 left-1/2 z-50 -translate-x-1/2 rounded-full bg-slate-950/80 shadow-lg sm:top-3 dark:bg-white/80"
         >
           <div className="mx-auto px-4">
-            <div className="flex h-16 items-center justify-center">
+            <div className="flex h-16 items-center justify-center gap-4">
               {/* Navigation Links */}
               <nav className="flex items-center gap-1">
                 {navLinks.map(({ Icon, text }, index) => (
@@ -37,11 +44,19 @@ const FloatingHeader = ({ isScrolled, navLinks }: floatingHeaderProps) => {
                   </button>
                 ))}
               </nav>
+              <div className="flex items-center pr-2">
+                <button
+                  onClick={closeFloatingHeader}
+                  className="rounded-full p-1 text-white hover:bg-gray-500/50 dark:text-black dark:hover:bg-gray-400/50"
+                >
+                  <X className="h-4 w-4 shrink-0" />
+                </button>
+              </div>
             </div>
           </div>
         </motion.div>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 
