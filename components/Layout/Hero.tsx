@@ -13,7 +13,7 @@ export const Hero = () => {
   };
   return (
     <div className="relative overflow-hidden">
-      <div className="mx-auto mt-8 max-w-7xl px-4 py-20 sm:py-24">
+      <div className="custom:px-12 mx-auto mt-8 max-w-7xl px-4 py-20 sm:py-24">
         <div className="flex flex-col items-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

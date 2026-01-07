@@ -57,7 +57,7 @@ export const About = () => {
 
   return (
     <div className="py-20">
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="custom:px-12 mx-auto max-w-7xl px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
